@@ -7,8 +7,8 @@ Authentication Screen
 
 ## 📦 Packages Used
 - [`flutter_svg`](https://pub.dev/packages/flutter_svg/install)
-- [`flutter_screenutil`](https://pub.dev/packages/flutter pub add flutter_screenutil)
-- [`smooth_page_indicator`](https://pub.dev/packages/flutter pub add smooth_page_indicator)
+- [`flutter_screenutil`](https://pub.dev/packages/flutter_screenutil)
+- [`smooth_page_indicator`](https://pub.dev/packages/smooth_page_indicator)
 
 
 ## 📱 Screenshots
