@@ -73,6 +73,7 @@ const String classical ="Classical Highlights";
 const String riviera ="Riviera Highlights";
 const String cairo ="Cairo";
 const String day ="Days";
+const String hotel ="Hotel";
 
 //? chatbot
 const String chatBot = "Chatbot";

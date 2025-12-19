@@ -26,6 +26,10 @@ dependencies:
   flutter_screenutil: ^5.9.3
   smooth_page_indicator: ^2.0.1
   flutter_svg: ^2.2.3
+  dio: ^5.9.0
+  bloc: ^9.1.0
+  flutter_bloc: ^9.1.1
+  url_launcher: ^6.3.2
 
 dev_dependencies:
   flutter_test:

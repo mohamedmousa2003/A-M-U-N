@@ -19,4 +19,5 @@ abstract class AppColor {
   static const Color offer = Color(0xff27FA86);
 
   static const Color blueWhite = Color(0xffBFB2F8);
+  static const Color blue = Colors.blue;
 }

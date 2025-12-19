@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'features/auth/presentation/pages/select_auth.dart';
+import 'features/layout/bottom_nav_screen.dart';
 import 'features/onboarding/presentation/pages/onboarding_view.dart';
 import 'features/splash/splash_view.dart';
 
@@ -22,11 +22,11 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: "A M U N",
           debugShowCheckedModeBanner: false,
-          initialRoute: SplashView.routeName,
+          initialRoute: OnboardingView.routeName,
           routes: {
             SplashView.routeName: (context) => SplashView(),
             OnboardingView.routeName: (context) => OnboardingView(),
-            SelectAuth.routeName: (context) => SelectAuth(),
+            MainBottomNavBar.routeName :(context) =>MainBottomNavBar(),
           },
         );
       },

@@ -1,3 +1,4 @@
+import 'package:amun/features/home/presentation/pages/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -6,7 +7,7 @@ import '../../../../core/constant/text.dart';
 import '../../../../core/extensions/context_extention.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_text_style.dart';
-import '../../../auth/presentation/pages/select_auth.dart';
+import '../../../layout/bottom_nav_screen.dart';
 import '../../data/Model/onboarding_item.dart';
 import '../../data/onboarding_data.dart';
 
@@ -30,7 +31,7 @@ class OnboardingPageItem extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         /// Skip button
-        if (index != 0)
+        !isLastPage.value ?
           Align(
             alignment: Alignment.centerLeft,
             child: TextButton(
@@ -45,8 +46,7 @@ class OnboardingPageItem extends StatelessWidget {
               ),
             ),
           )
-        else
-          SizedBox(height: 24.h),
+        : SizedBox.shrink(),
 
         /// Image
         SvgPicture.asset(
@@ -122,7 +122,7 @@ class OnboardingPageItem extends StatelessWidget {
                   onPressed: () {
                     if (last) {
                       context.pushNamedAndRemoveUntil(
-                        SelectAuth.routeName,
+                        MainBottomNavBar.routeName,
                       );
                     } else {
                       pageController.nextPage(
