@@ -5,4 +5,5 @@ abstract class HomeRepository {
   Future<List<HotelEntity>> getHotels();
   Future<List<ClassicalEntity>> getClassicalHighlights();
   Future<List<RivieraEntity>> getRivieraHighlights();
+  // List<ClassicalEntity> getFavorites();
 }

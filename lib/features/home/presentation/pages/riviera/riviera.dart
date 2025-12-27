@@ -1,14 +1,17 @@
+import 'package:amun/features/home/presentation/cubit/state/riviera_state.dart';
 import 'package:amun/features/home/presentation/pages/riviera/riviera_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../favorites/presentation/cubit/favorite_cubit.dart';
+import '../../../../favorites/presentation/helpers/favorite_mapper.dart';
 import '../../../data/repositories/home_repository_impl.dart';
 import '../../../data/data_sources/remote/home_remote_data_source_impl.dart';
 import '../../../domain/use_cases/get_riviera_usecase.dart';
-import '../../cubit/home_cubit.dart';
-import '../../cubit/home_state.dart';
+import '../../cubit/home_cubit/riviera_cubit.dart';
 import '../../widgets/home_item_widget.dart';
-import '../classical/classical_details_screen.dart';
+import '../../widgets/home_shimmer.dart';
+
 
 class Riviera extends StatelessWidget {
   const Riviera({super.key});
@@ -16,16 +19,22 @@ class Riviera extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeCubit(
-        getRivieraUseCase: GetRivieraUseCase(HomeRepositoryImpl(HomeRemoteDataSourceImpl())),
+      create: (context) => RivieraCubit(
+         GetRivieraUseCase(HomeRepositoryImpl(HomeRemoteDataSourceImpl())),
       )..loadRiviera(),
       child: SizedBox(
         height: 260.h,
-        child: BlocBuilder<HomeCubit, HomeState>(
+        child: BlocBuilder<RivieraCubit, RivieraState>(
           builder: (context, state) {
-            if (state is HomeLoading) return const Center(child: CircularProgressIndicator());
+            if (state is LoadingRivieraState){
+              return ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 5,
+                itemBuilder: (_, _) => const HomeShimmerItem(),
+              );
+            }
 
-            if (state is RivieraLoading) {
+            if (state is LoadedRivieraState) {
               return ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: state.riviera.length,
@@ -43,12 +52,17 @@ class Riviera extends StatelessWidget {
                       ),
                     ),
                     ),
+                    onFavouriteTap: () {
+                      context.read<FavoriteCubit>().toggleFavorite(
+                        rivieraToFavorite(item),
+                      );
+                    },
                   );
                 },
               );
             }
 
-            if (state is HomeError) return Center(child: Text(state.message));
+            if (state is ErrorRivieraState) return Center(child: Text(state.error));
 
             return const SizedBox();
           },

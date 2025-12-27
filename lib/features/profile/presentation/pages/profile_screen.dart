@@ -1,0 +1,329 @@
+/*
+
+import 'package:amun/features/profile/presentation/pages/profile_setting.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/constant/text.dart';
+import '../../../../core/extensions/context_extention.dart';
+import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/app_text_style.dart';
+import '../widgets/click_image.dart';
+import '../widgets/design_image.dart';
+
+class ProfileScreen extends StatefulWidget {
+  static const String routeName = 'profile';
+
+  const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+
+  @override
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColor.white,
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(16.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(height: 20.h,),
+
+            // Header
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(vertical: 20.h),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [AppColor.primary, AppColor.primary.withOpacity(0.7)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(15.r),
+              ),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: GestureDetector(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          barrierColor: Colors.black.withOpacity(0.8),
+                          builder: (context) {
+                            return AnimatedImageDialog();
+                          },
+                        );
+                      },
+                      child: CircleAvatar(
+                        radius: 45.r,
+                        backgroundColor: Colors.white,
+                        child: ClipOval(
+                          child: DesignImage(
+                            width: 80.w,
+                            height: 80.h,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 12.w,),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        // SharedPrefsService.getString("name")??
+                            "name",
+                        style: AppTextStyle.size20.copyWith(
+                          color: AppColor.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        // SharedPrefsService.getString("email")??
+                            "email",
+                        style: AppTextStyle.size16.copyWith(
+                          color: AppColor.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 30.h,),
+
+            // Settings Title
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                setting,
+                style: AppTextStyle.size21.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: AppColor.primary,
+                ),
+              ),
+            ),
+            SizedBox(height: 16.h,),
+
+            // Settings Card
+            Container(
+              decoration: BoxDecoration(
+                color: AppColor.grayCard,
+                borderRadius: BorderRadius.circular(20.r),
+              ),
+              child: Column(
+                children: [
+                  buildProfileItem(
+                    title: favourites,
+                    icon: Icons.favorite_border,
+                    onTap: () {},
+                  ),
+                  buildProfileItem(
+                    title: edit,
+                    icon: Icons.edit,
+                    onTap: () => context.pushNamed(ProfileImageSetting.routeName),
+                  ),
+                  buildProfileItem(
+                    title: signOut,
+                    icon: Icons.logout,
+                    onTap: () {},
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // void showLanguageBottomSheet(
+  //     BuildContext context,
+  //     String selectedLanguage,
+  //     Function(String) onLanguageSelected,
+  //     ) {
+  //   showModalBottomSheet(
+  //     context: context,
+  //     isScrollControlled: true,
+  //     backgroundColor: Colors.transparent,
+  //     builder: (context) {
+  //       return StatefulBuilder(
+  //         builder: (context, setState) {
+  //           return Container(
+  //             padding: EdgeInsets.all(16.w),
+  //             decoration: BoxDecoration(
+  //               color: Colors.white,
+  //               borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
+  //             ),
+  //             child: Column(
+  //               mainAxisSize: MainAxisSize.min,
+  //               children: [
+  //                 Container(
+  //                   width: 52.w,
+  //                   height: 5.h,
+  //                   decoration: BoxDecoration(
+  //                     color: const Color(0xFFECECEC),
+  //                     borderRadius: BorderRadius.circular(5.r),
+  //                   ),
+  //                 ),
+  //                 SizedBox(height: 56.h,),
+  //                 MaterialButtonWidget(
+  //                   title: Text(saveAndChange),
+  //                   onPressed: () {
+  //                     Navigator.pop(context);
+  //                   },
+  //                   colorBackground: AppColor.primary,
+  //                   colorText: AppColor.white,
+  //                 ),
+  //               ],
+  //             ),
+  //           );
+  //         },
+  //       );
+  //     },
+  //   );
+  // }
+
+  Widget buildProfileItem({
+    required String title,
+    required IconData icon,
+    required VoidCallback onTap,
+  }) {
+    return ListTile(
+      contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
+      leading: Icon(icon, color: AppColor.primary),
+      title: Text(
+        title,
+        style: AppTextStyle.size18.copyWith(fontWeight: FontWeight.w500),
+      ),
+      trailing: Icon(Icons.arrow_forward_ios_rounded, size: 20, color: AppColor.gray),
+      onTap: onTap,
+    );
+  }
+
+
+  Widget designCard({
+    required VoidCallback onTap,
+    required String title,
+    Widget? trailing,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: ListTile(
+        title: Text(title, style: AppTextStyle.size18),
+        trailing:
+        trailing ?? const Icon(Icons.arrow_forward_ios_outlined, size: 30),
+      ),
+    );
+  }
+
+  // Show logout
+  // void _showUnfollowDialog(BuildContext context) {
+  //   showDialog(
+  //     context: context,
+  //     builder:
+  //         (context) => CustomDialog(
+  //       widthICon: 56,
+  //       heightICon: 56,
+  //       title: sureYouWantToLogOut,
+  //       content: willLoggedOutApp,
+  //       confirmText: logout,
+  //       onCancel: () => context.pop(),
+  //       onConfirm: () {
+  //         SharedPrefsService.clearAll("token");
+  //         context.pushNamedAndRemoveUntil(SelectAuth.routeName);
+  //       },
+  //       confirmBackgroundColor: AppColor.primary,
+  //       cancelBackgroundColor: AppColor.grayCard,
+  //       cancelHaveBorder: false,
+  //       iconPath: ImagePng.logo,
+  //     ),
+  //   );
+  // }
+}
+
+ */
+
+import 'package:amun/features/auth/presentation/pages/select_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../core/constant/text.dart';
+import '../../../../core/utils/app_colors.dart';
+import '../../../Flight/presentation/pages/aire.dart';
+import '../widgets/logout_tile.dart';
+import '../widgets/profile_header.dart';
+import '../widgets/profile_item.dart';
+import '../widgets/profile_section.dart';
+
+class ProfileScreen extends StatelessWidget {
+  static const String routeName = 'profile';
+  const ProfileScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColor.white,
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(16.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 20.h),
+
+            const ProfileHeader(),
+
+            SizedBox(height: 28.h),
+
+            ProfileSection(
+              title: "My Trips",
+              children: [
+                ProfileItem(
+                  onTap: (){
+                     Navigator.pushNamed(context, FlightScreen.routeName);
+                  },
+                    title: "Flights", icon: Icons.flight_takeoff),
+                ProfileItem(title: "Previous Trips", icon: Icons.history),
+                ProfileItem(title: "Saved Plans", icon: Icons.bookmark_border),
+              ],
+            ),
+
+            SizedBox(height: 24.h),
+
+            ProfileSection(
+              title: "Favorites",
+              children: [
+                ProfileItem(title: "Favorite Places", icon: Icons.place_outlined),
+                ProfileItem(title: "Favorite Hotels", icon: Icons.hotel_outlined),
+                ProfileItem(title: "Favorite Activities", icon: Icons.local_activity),
+              ],
+            ),
+
+            SizedBox(height: 24.h),
+
+            ProfileSection(
+              title: setting,
+              children: [
+                ProfileItem(title: "Language", icon: Icons.language),
+                ProfileItem(title: "Notifications", icon: Icons.notifications_none),
+              ],
+            ),
+
+            SizedBox(height: 24.h),
+
+            LogoutTile(
+              onTap: () => Navigator.pushNamed(context, SelectAuthScreen.routeName),
+            ),
+
+            SizedBox(height: 40.h),
+          ],
+        ),
+      ),
+    );
+  }
+}

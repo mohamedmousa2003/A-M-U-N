@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/constant/text.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_text_style.dart';
+import '../../../chatBot/presentation/pages/chat_bot_page.dart';
 import '../widgets/search_item.dart';
 import 'classical/classical.dart';
 import 'hotel/hotel_view.dart';
@@ -22,7 +23,11 @@ class HomeView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 20.h,),
-              SearchItem(),
+              SearchItem(
+                onLogoTap: () {
+                  Navigator.pushNamed(context, ChatBotScreen.routeName);
+                },
+              ),
               SizedBox(height: 20.h,),
               Text(classical,style: AppTextStyle.size20.copyWith(fontWeight: FontWeight.bold),),
               Classical(),

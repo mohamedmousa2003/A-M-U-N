@@ -1,13 +1,14 @@
 
 import 'package:amun/features/home/data/repositories/home_repository_impl.dart';
+import 'package:amun/features/home/presentation/cubit/home_cubit/hotel_cubit.dart';
+import 'package:amun/features/home/presentation/cubit/state/hotel_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../data/data_sources/remote/home_remote_data_source_impl.dart';
 import '../../../domain/use_cases/get_hotels_usecase.dart';
-import '../../cubit/home_cubit.dart';
-import '../../cubit/home_state.dart';
+import '../../widgets/home_shimmer.dart';
 import '../../widgets/hotel_item_widget.dart';
 import 'hotel_details_screen.dart';
 
@@ -18,25 +19,29 @@ class HotelView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeCubit(
-        getHotelsUseCase: GetHotelsUseCase(
+      create: (context) => HotelCubit(
+         GetHotelsUseCase(
           HomeRepositoryImpl(HomeRemoteDataSourceImpl()),
         ),
       )..loadHotels(),
-      child: BlocBuilder<HomeCubit, HomeState>(
+      child: BlocBuilder<HotelCubit, HotelState>(
         builder: (context, state) {
-          if (state is HomeLoading) {
-            return const Center(child: CircularProgressIndicator());
+          if (state is LoadingHotelState) {
+            return ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: 5,
+              itemBuilder: (_, _) => const HomeShimmerItem(),
+            );
           }
 
-          if (state is HotelsLoading) {
+          if (state is LoadedHotelState) {
             return SizedBox(
               height: 260.h,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: state.hotels.length,
+                itemCount: state.hotel.length,
                 itemBuilder: (context, index) {
-                  final item = state.hotels[index];
+                  final item = state.hotel[index];
 
                   return HotelItemWidget(
                     title: item.name ?? "",
@@ -59,8 +64,8 @@ class HotelView extends StatelessWidget {
           }
 
 
-          if (state is HomeError) {
-            return Center(child: Text(state.message));
+          if (state is ErrorHotelState) {
+            return Center(child: Text(state.error));
           }
 
           return const SizedBox();

@@ -1,9 +1,35 @@
 # A M U N 
 
-📄 Implemented Screens
-Splash Screen
-Onboarding (3 Screens)
-Authentication Screen
+🚀 Overview
+A production-ready tourism mobile application built with Flutter,
+focusing on clean architecture, scalable state management, and real-world integrations such as APIs,
+Firebase, Maps, and AI-powered trip planning.
+
+Core Features
+Splash Screen & Onboarding for smooth first-time user experience
+Firebase Authentication (secure login & signup)
+Home Screen (API-driven) displaying:
+  - Coastal destinations
+  - Historical & archaeological places
+  - Hotels
+Detailed Place View with:
+  - Map location link
+  - Extended place details
+Hotels Booking via external reservation links
+Flights Screen showing available flights for tomorrow
+AI Trip Planner generating travel plans based on:
+  - Budget
+  - Number of days
+Gemini AI Integration for intelligent recommendations
+
+🧠 Architecture & Engineering
+
+Clean Architecture
+Bloc / Cubit for state management
+Dependency Injection
+REST APIs 
+Separation of Concerns
+Scalable & Testable Codebase
 
 ## 📦 Packages Used
 - [`flutter_svg`](https://pub.dev/packages/flutter_svg/install)
@@ -12,6 +38,10 @@ Authentication Screen
 - [`dio`](https://pub.dev/packages/dio)
 - [`bloc`](https://pub.dev/packages/bloc)
 - [`url_launcher`](https://pub.dev/packages/url_launcher)
+- [`shimmer`](https://pub.dev/packages/shimmer)
+- [`flutter_gemini`](https://pub.dev/packages/flutter_gemini)
+- [`firebase_auth`](https://pub.dev/packages/firebase_auth)
+- [`get_it`](https://pub.dev/packages/get_it)
 
 
 ## 📱 Screenshots
@@ -20,105 +50,14 @@ Authentication Screen
 |:-------------------------------------:|:-------------------------------------------------:|:----------------------------------------------------:|:-------------------------------------------------------:|
 | ![Splash](assets/screenshot/splash_screen.png) | ![Onboarding One ](assets/screenshot/onboarding_one.png) | ![Onboarding Two](assets/screenshot/onboarding_two.png) | ![Onboarding last](assets/screenshot/onboarding_last.png) |
 
+|                     Login                     |                   Register                   |                    Home                    |                   Click category                   |
+|:---------------------------------------------:|:--------------------------------------------:|:------------------------------------------:|:----------------------------------------------------:|
+| ![Login](assets/screenshot/login.png) | ![Register ](assets/screenshot/register.png) | ![Home](assets/screenshot/home_Screen.png) | ![Click category](assets/screenshot/click_home.png) |
 
-🔁 App Flow
-Splash Screen
-      ↓
-Onboarding Screens (3 pages)
-      ↓
-Authentication Screen
+|                    Hotel                    |                   Flights                   |               Select My Trip               |                     Trip Plan                      |
+|:-------------------------------------------:|:-------------------------------------------:|:------------------------------------------:|:--------------------------------------------------:|
+| ![Hotel](assets/screenshot/click_hotel.png) | ![Flights ](assets/screenshot/flights.png) | ![Select My Trip](assets/screenshot/myTrip.png) | ![Trip Plan](assets/screenshot/trip_plan.png) |
 
-
-
-////? 
-
-User Action
-↓
-UI (Widget)
-↓
-Cubit / Bloc
-↓
-UseCase
-↓
-Repository (abstract)
-↓
-Repository Implementation
-↓
-Remote / Local Data Source
-↓
-API / DB
-↓
-Response
-↑
-Model → Entity
-↑
-UseCase
-↑
-Cubit / Bloc
-↑
-UI Update
-
-
-//? Auth 
-lib/features/auth/
-├── presentation/
-│   ├── cubit/
-│   │   └── auth_cubit.dart
-│   ├── pages/
-│   │   ├── login_page.dart
-│   │   ├── register_page.dart
-│   │   └── forget_password_page.dart
-│
-├── domain/
-│   ├── entities/
-│   │   └── user_entity.dart
-│   ├── repositories/
-│   │   └── auth_repository.dart
-│   └── usecases/
-│       ├── login_usecase.dart
-│       ├── register_usecase.dart
-│       ├── google_login_usecase.dart
-│       └── forget_password_usecase.dart
-│
-└── data/
-├── models/
-│   └── user_model.dart
-├── datasources/
-│   └── auth_remote_data_source.dart
-└── repositories/
-└── auth_repository_impl.dart
-
-//? Home
-lib/features/home/
-├── presentation/
-│   ├── cubit/
-│   │   └── home_cubit.dart
-│   ├── pages/
-│   │   └── home_page.dart
-│   └── widgets/
-│       ├── hotel_list.dart
-│       ├── classical_list.dart
-│       └── riviera_list.dart
-│
-├── domain/
-│   ├── entities/
-│   │   ├── hotel_entity.dart
-│   │   ├── classical_entity.dart
-│   │   └── riviera_entity.dart
-│   ├── repositories/
-│   │   └── home_repository.dart
-│   └── usecases/
-│       ├── get_hotels_usecase.dart
-│       ├── get_classical_usecase.dart
-│       └── get_riviera_usecase.dart
-│
-└── data/
-├── models/
-│   ├── hotel_model.dart
-│   ├── classical_model.dart
-│   └── riviera_model.dart
-├── datasources/
-│   └── home_remote_data_source.dart
-└── repositories/
-└── home_repository_impl.dart
-
+|                   ChatBot                   |                  Profile                   |
+|:-------------------------------------------:|:------------------------------------------:|
+| ![ChatBot](assets/screenshot/chatBot.png) | ![Profile ](assets/screenshot/profile.png) | 

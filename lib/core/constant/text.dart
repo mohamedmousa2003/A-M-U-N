@@ -5,7 +5,8 @@ const String skip = "Skip";
 const String getStarted = "Get Started";
 //? Auth
 const String login = "Login";
-const String createAccount = "CREATE ACCOUNT";
+const String createAccount = "Create Account";
+const String continueAsGuest = "Continue as Guest";
 const String getPassword = "Reset Password";
 const String desGetPassword = "Enter your email to reset your password!";
 const String email = "Email";
@@ -55,6 +56,7 @@ const String help = "Help";
 const String signOut = "Sign out";
 const String privacyPolicy = "privacy policy";
 const String favourites = "Favourites";
+const String edit = "Edit Profile";
 const String version = "Version";
 const String sureYouWantToLogOut = "Are you sure you want to log out?";
 const String willLoggedOutApp = "You will be logged out of the app.";
@@ -75,8 +77,9 @@ const String cairo ="Cairo";
 const String day ="Days";
 const String hotel ="Hotel";
 
-//? chatbot
-const String chatBot = "Chatbot";
+//? chatBot
+const String logo ="A M U N";
+const String chatBot = "ChatBot";
 const String whatCanIHelp = "What can I help with ?";
 
 //? trip
@@ -87,6 +90,8 @@ const String budget ="Budget(USD)";
 const String myTrip ="Plan My Trip";
 const String yourNumber ="Enter your number";
 const String yourBudget ="Enter your Budget";
+const String pleaseEnterNumber = "Please enter number of days";
+const String enterValidNumber = "Enter a valid number";
 // Rive assets
 const String iconsRiv = 'assets/rive/icons.riv';
 const String menuButtonRiv = 'assets/samples/ui/rive_app/rive/menu_button.riv';
@@ -98,6 +103,6 @@ const String warning ="Warning";
 const String noResult ="There are no results";
 const String writeResult ="Please write a place.";
 const String noPlace ="The place does not exist, try writing another name.";
-//? heandeled error
+//? handled error
 const String noInternetConnection ="No internet connection";
 const String checkYourConnection = "Check your connection and try again.";

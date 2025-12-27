@@ -3,7 +3,6 @@ import 'package:amun/features/home/data/models/classical_model.dart';
 import 'package:amun/features/home/data/models/hotel_model.dart';
 import 'package:amun/features/home/data/models/riviera_model.dart';
 import 'package:dio/dio.dart';
-
 import '../../../../../core/api/end_points.dart';
 import '../../../../../core/api/status_codes.dart';
 

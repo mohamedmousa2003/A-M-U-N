@@ -1,4 +1,3 @@
-import 'package:amun/features/home/presentation/pages/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -7,7 +6,7 @@ import '../../../../core/constant/text.dart';
 import '../../../../core/extensions/context_extention.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_text_style.dart';
-import '../../../layout/bottom_nav_screen.dart';
+import '../../../auth/presentation/pages/select_auth.dart';
 import '../../data/Model/onboarding_item.dart';
 import '../../data/onboarding_data.dart';
 
@@ -107,7 +106,7 @@ class OnboardingPageItem extends StatelessWidget {
 
             ValueListenableBuilder<bool>(
               valueListenable: isLastPage,
-              builder: (_, last, __) {
+              builder: (_, last, _) {
                 return ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColor.primary,
@@ -122,7 +121,7 @@ class OnboardingPageItem extends StatelessWidget {
                   onPressed: () {
                     if (last) {
                       context.pushNamedAndRemoveUntil(
-                        MainBottomNavBar.routeName,
+                        SelectAuthScreen.routeName,
                       );
                     } else {
                       pageController.nextPage(

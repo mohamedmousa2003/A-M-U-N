@@ -8,6 +8,7 @@ class ClassicalEntity {
   String? imageUrl;
   int? cost;
 
+
   ClassicalEntity({
     this.name,
     this.address,

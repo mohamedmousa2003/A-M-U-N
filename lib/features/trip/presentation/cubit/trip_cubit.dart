@@ -1,17 +1,17 @@
 import 'package:bloc/bloc.dart';
 import '../../domain/entities/trip_entity.dart';
-import '../../domain/repositories/trip_repository.dart';
+import '../../domain/use_cases/create_trip_use_cases.dart';
 import 'trip_state.dart';
 
 class TripCubit extends Cubit<TripState> {
-  final TripRepository repository;
+  final CreateTripUseCase repository;
 
   TripCubit(this.repository) : super(TripInitial());
 
   Future<void> fetchTrip({required int days, required double budget}) async {
     try {
       emit(TripLoading());
-      final TripEntity trip = await repository.getTripPlan(
+      final TripEntity trip = await repository.call(
         numberOfDays: days,
         budget: budget,
       );

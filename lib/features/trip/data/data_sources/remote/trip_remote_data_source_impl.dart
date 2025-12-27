@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import '../../../../../core/api/status_codes.dart';
 import '../../models/TripModel.dart';
 
-class TripRepositoryImpl implements TripRemoteDataSource {
+class TripRepositorySourceImpl implements TripRemoteDataSource {
   final dio = Dio();
 
   @override
